@@ -10,3 +10,16 @@ resource "kubernetes_secret" "do-token" {
 
   type = "Opaque"
 }
+
+
+
+resource "kubernetes_config_map" "traefik_conf" {
+  metadata {
+    name      = "traefik-conf"
+    namespace = "kube-system"
+  }
+
+  data = {
+    "traefik.toml" = var.traefik_config
+  }
+}
